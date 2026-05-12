@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donette Napone — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green:       #74a12e;
+      --green-light: #b9dca9;
+      --pink:        #fc9fb1;
+      --pink-light:  #fcbacb;
+      --white:       #ffffff;
+      --dark:        #1c2117;
+      --mid:         #3a4a2e;
+      --gray:        #f5f7f3;
+      --text:        #2d3a22;
+      --muted:       #7a8c6a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); }
+
+    /* ── HERO ─────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 60%, #2a4a1a 100%);
+      color: var(--white); padding: 80px 40px 70px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(185,220,169,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -60px; left: 10%;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(252,159,177,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green-light); margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--pink); }
+    .hero-bio {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+      max-width: 620px; color: rgba(255,255,255,0.82); margin-bottom: 32px;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-tag {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px; padding: 5px 14px; font-size: 0.78rem;
+      font-weight: 500; color: rgba(255,255,255,0.85); letter-spacing: 0.03em;
+    }
+
+    /* ── SHARED SECTION WRAPPER ───────────── */
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 56px 24px 72px; }
+
+    /* ── CATEGORY HOMEPAGE ────────────────── */
+    #home-view { display: block; }
+    .home-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .cat-tile {
+      position: relative; border-radius: 14px; overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.1);
+      border: 1px solid #e8ede3;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .cat-tile:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(116,161,46,0.18); }
+    .cat-tile img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+      filter: brightness(0.72);
+    }
+    .cat-tile:hover img { transform: scale(1.05); filter: brightness(0.6); }
+    .cat-tile-body {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 20px;
+      background: linear-gradient(to top, rgba(20,30,14,0.82) 0%, transparent 60%);
+    }
+    .cat-tile-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      margin-bottom: 4px;
+    }
+    .cat-tile-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; color: var(--white); line-height: 1.2;
+    }
+    .cat-tile-count {
+      margin-top: 6px; font-size: 0.75rem; font-weight: 500;
+      color: rgba(255,255,255,0.55);
+    }
+    .cat-tile-arrow {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.9rem;
+      opacity: 0; transform: translateX(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cat-tile:hover .cat-tile-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ── GALLERY VIEW ─────────────────────── */
+    #gallery-view { display: none; }
+    .gallery-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--gray); border: 1px solid #dde5d4;
+      border-radius: 8px; padding: 9px 16px;
+      font-size: 0.82rem; font-weight: 500; color: var(--text);
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .back-btn:hover { background: var(--green-light); border-color: var(--green); }
+    .gallery-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--text);
+    }
+    .gallery-heading span { color: var(--green); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── CARDS ────────────────────────────── */
+    .card {
+      background: var(--white); border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #edf0e8;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer; display: flex; flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 32px rgba(116,161,46,0.15);
+      border-color: var(--green-light);
+    }
+    .card-thumb {
+      width: 100%; object-fit: cover; display: block; background: var(--gray);
+      aspect-ratio: 1/1;
+    }
+    .card-thumb.portrait { aspect-ratio: 3/4; }
+    .card-thumb.wide     { aspect-ratio: 16/9; }
+    .card-thumb.doc      { aspect-ratio: 8.5/11; object-position: top; }
+    .card-body {
+      padding: 12px 14px 14px; flex: 1;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .card-cat {
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; padding: 3px 8px; border-radius: 10px;
+      display: inline-block; align-self: flex-start;
+    }
+    .cat-social-media   { background: #fde8ee; color: #c94f72; }
+    .cat-presentations  { background: #e8f4d8; color: #4a7a1a; }
+    .cat-one-pagers     { background: #fdf0e0; color: #b07020; }
+    .cat-branded-docs   { background: #e0edf8; color: #2a5f8a; }
+    .cat-workbooks      { background: #f0e8f8; color: #7a3a9a; }
+    .cat-flyers         { background: #fce8e8; color: #a83030; }
+    .cat-infographics   { background: #e8f8f0; color: #1a7a4a; }
+    .cat-canva-designs  { background: #f8f0e8; color: #8a5a2a; }
+    .cat-landing-pages  { background: #e8f0fd; color: #2a4a8a; }
+    .cat-websites       { background: #e8fdf8; color: #1a6a5a; }
+    .cat-newsletters    { background: #fdf8e8; color: #8a6a1a; }
+    .cat-blogs          { background: #f4e8fd; color: #6a2a8a; }
+    .card-title { font-size: 0.85rem; font-weight: 500; color: var(--text); line-height: 1.4; }
+    .card-link {
+      font-size: 0.75rem; color: var(--green); font-weight: 500;
+      text-decoration: none; display: inline-flex; align-items: center;
+      gap: 4px; margin-top: auto; padding-top: 6px;
+    }
+    .card-link:hover { text-decoration: underline; }
+
+    /* ── PRICING ──────────────────────────── */
+    .pricing-wrap {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--mid) 100%);
+      padding: 80px 40px 90px; position: relative; overflow: hidden;
+    }
+    .pricing-wrap::before {
+      content: ''; position: absolute; top: -100px; right: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(185,220,169,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pricing-wrap::after {
+      content: ''; position: absolute; bottom: -80px; left: 5%;
+      width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(252,159,177,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pricing-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .pricing-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--green-light);
+      margin-bottom: 12px; text-align: center;
+    }
+    .pricing-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--white); text-align: center;
+      margin-bottom: 12px; line-height: 1.15;
+    }
+    .pricing-heading span { color: var(--pink); }
+    .pricing-subhead {
+      text-align: center; color: rgba(255,255,255,0.6);
+      font-size: 0.97rem; font-weight: 300;
+      max-width: 540px; margin: 0 auto 52px; line-height: 1.7;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 32px 28px 36px;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+    .pricing-card.featured {
+      background: rgba(116,161,46,0.15);
+      border-color: rgba(116,161,46,0.45);
+    }
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute; top: 16px; right: 16px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--green-light); background: rgba(116,161,46,0.2);
+      border: 1px solid rgba(116,161,46,0.35);
+      border-radius: 20px; padding: 3px 10px;
+    }
+    .plan-badge {
+      display: inline-block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 18px; align-self: flex-start;
+    }
+    .badge-1 { background: rgba(252,186,203,0.18); color: var(--pink-light); border: 1px solid rgba(252,186,203,0.3); }
+    .badge-2 { background: rgba(185,220,169,0.18); color: var(--green-light); border: 1px solid rgba(185,220,169,0.3); }
+    .badge-3 { background: rgba(252,159,177,0.18); color: #ffc8d6;            border: 1px solid rgba(252,159,177,0.3); }
+    .plan-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--white);
+      margin-bottom: 6px; line-height: 1.2;
+    }
+    .plan-tagline {
+      font-size: 0.83rem; color: rgba(255,255,255,0.5);
+      font-weight: 300; margin-bottom: 24px; line-height: 1.55;
+    }
+    .plan-price {
+      display: flex; align-items: baseline; gap: 3px; margin-bottom: 6px;
+    }
+    .plan-price .amount {
+      font-size: 2.8rem; font-weight: 700; color: var(--white); line-height: 1;
+    }
+    .plan-price .currency {
+      font-size: 1.3rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      align-self: flex-start; padding-top: 5px;
+    }
+    .plan-price .period {
+      font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 400;
+    }
+    .plan-turnaround {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.78rem; font-weight: 600; color: var(--green-light);
+      background: rgba(116,161,46,0.15); border: 1px solid rgba(116,161,46,0.25);
+      border-radius: 20px; padding: 5px 12px;
+      margin-bottom: 24px; align-self: flex-start;
+    }
+    .plan-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 22px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .plan-features li {
+      display: flex; gap: 9px; align-items: flex-start;
+      font-size: 0.86rem; color: rgba(255,255,255,0.78); line-height: 1.45;
+    }
+    .plan-features li .check {
+      flex-shrink: 0; width: 17px; height: 17px; border-radius: 50%;
+      background: rgba(116,161,46,0.25); border: 1px solid rgba(116,161,46,0.4);
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .pricing-note {
+      text-align: center; margin-top: 28px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.7;
+    }
+    .pricing-note a { color: rgba(255,255,255,0.5); text-decoration: underline; }
+
+    /* ── LIGHTBOX ─────────────────────────── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(20,28,15,0.93); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative; max-width: 90vw; max-height: 90vh;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .lightbox img {
+      max-width: 90vw; max-height: 80vh; object-fit: contain;
+      border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-title { color: rgba(255,255,255,0.8); font-size: 0.88rem; }
+    .lightbox-close {
+      position: fixed; top: 20px; right: 24px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      color: white; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; cursor: pointer; transition: background 0.2s; line-height: 1;
+    }
+    .lightbox-close:hover { background: rgba(252,159,177,0.3); }
+    .lightbox-nav { display: flex; gap: 12px; }
+    .lightbox-nav button {
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      color: white; width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; transition: background 0.2s;
+    }
+    .lightbox-nav button:hover { background: rgba(116,161,46,0.4); }
+
+    /* ── FOOTER ───────────────────────────── */
+    footer {
+      background: #111810; color: rgba(255,255,255,0.38);
+      text-align: center; padding: 28px 24px;
+      font-size: 0.8rem; letter-spacing: 0.04em;
+    }
+    footer span { color: var(--pink); }
+    footer a { color: rgba(255,255,255,0.38); text-decoration: underline; }
+
+    @media (max-width: 860px) {
+      .pricing-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 52px 20px 52px; }
+      .section-wrap { padding: 36px 16px 52px; }
+      .cat-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+      .pricing-wrap { padding: 60px 20px 70px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ─────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Creative Portfolio</p>
+    <h1>Donette <span>Napone</span></h1>
+    <p class="hero-bio">Brand strategist and content designer helping nonprofits, healthcare organizations, and purpose-driven businesses communicate with clarity and impact. From social media campaigns to annual reports, presentations, and branded toolkits — every piece is crafted to connect and convert.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Landing Pages</span>
+      <span class="hero-tag">Websites</span>
+      <span class="hero-tag">Social Media</span>
+      <span class="hero-tag">Newsletters</span>
+      <span class="hero-tag">Blogs &amp; Articles</span>
+      <span class="hero-tag">Presentations</span>
+      <span class="hero-tag">One Pagers</span>
+      <span class="hero-tag">Branded Documents</span>
+      <span class="hero-tag">Workbooks</span>
+      <span class="hero-tag">Flyers</span>
+      <span class="hero-tag">Infographics</span>
+      <span class="hero-tag">Other Canva Designs</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOMEPAGE: CATEGORY GRID ──────────── -->
+<section id="home-view">
+  <div class="section-wrap">
+    <p class="home-label">Browse by Category</p>
+    <div class="cat-grid">
+
+      <div class="cat-tile" data-cat="landing-pages">
+        <img src="web_thumbs/lyw_landing_page.jpg" alt="Landing Pages"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Landing Pages</div>
+          <div class="cat-tile-count">1 piece</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="websites">
+        <img src="web_thumbs/erinhutt_website.jpg" alt="Websites"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Websites</div>
+          <div class="cat-tile-count">2 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="social-media">
+        <img src="SocMed Post/1.png" alt="Social Media"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Social Media</div>
+          <div class="cat-tile-count">43 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="newsletters">
+        <img src="web_thumbs/newsletter_dei.jpg" alt="Newsletters"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Newsletters</div>
+          <div class="cat-tile-count">3 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="blogs">
+        <img src="web_thumbs/blog_giving_tuesday.jpg" alt="Blogs &amp; Articles"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Blogs &amp; Articles</div>
+          <div class="cat-tile-count">4 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="presentations">
+        <img src="pdf_thumbs/EARN_Presentation.png" alt="Presentations"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Presentations</div>
+          <div class="cat-tile-count">2 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="one-pagers">
+        <img src="pdf_thumbs/One_Pager_Case_Study_Aligning_Departmental_Communications.png" alt="One Pagers"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">One Pagers</div>
+          <div class="cat-tile-count">3 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="branded-docs">
+        <img src="pdf_thumbs/NCST_2025_Annual_Report.png" alt="Branded Documents"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Branded Documents</div>
+          <div class="cat-tile-count">3 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="workbooks">
+        <img src="pdf_thumbs/Nurturing_Peak_Performance.png" alt="Workbooks"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Workbooks</div>
+          <div class="cat-tile-count">2 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="flyers">
+        <img src="Retreat Flyer/1.jpg" alt="Flyers"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Flyers</div>
+          <div class="cat-tile-count">3 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="infographics">
+        <img src="WOMEN IN MILITARY MEDICINE.png" alt="Infographics"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Infographics</div>
+          <div class="cat-tile-count">2 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+      <div class="cat-tile" data-cat="canva-designs">
+        <img src="Podcast Cover/1.png" alt="Other Canva Designs"/>
+        <div class="cat-tile-body">
+          <div class="cat-tile-label">Work</div>
+          <div class="cat-tile-name">Other Canva Designs</div>
+          <div class="cat-tile-count">6 pieces</div>
+        </div>
+        <div class="cat-tile-arrow">→</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY VIEW ──────────────────────── -->
+<section id="gallery-view">
+  <div class="section-wrap">
+    <div class="gallery-header">
+      <button class="back-btn" id="back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        All Categories
+      </button>
+      <h2 class="gallery-heading" id="gallery-heading">Work</h2>
+    </div>
+    <div class="grid" id="grid">
+
+      <!-- ── LANDING PAGES ── -->
+      <div class="card" data-cat="landing-pages" data-img="web_thumbs/lyw_landing_page.jpg" data-title="Women Physicians Leadership Program" data-url="https://www.gretchenrickards.com/lyw">
+        <img class="card-thumb wide" src="web_thumbs/lyw_landing_page.jpg" alt="Landing Page" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-landing-pages">Landing Page</span>
+          <p class="card-title">Women Physicians Leadership Program</p>
+          <a class="card-link" href="https://www.gretchenrickards.com/lyw" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Visit Page
+          </a>
+        </div>
+      </div>
+
+      <!-- ── WEBSITES ── -->
+      <div class="card" data-cat="websites" data-img="web_thumbs/erinhutt_website.jpg" data-title="Nonprofit &amp; Government Strategy Website" data-url="https://www.erinhutt.com/">
+        <img class="card-thumb wide" src="web_thumbs/erinhutt_website.jpg" alt="Nonprofit Strategy Website" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-websites">Website</span>
+          <p class="card-title">Nonprofit &amp; Government Strategy Website</p>
+          <a class="card-link" href="https://www.erinhutt.com/" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Visit Site
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="websites" data-img="web_thumbs/projectsolved_website.jpg" data-title="Change Management Consulting Website" data-url="https://www.projectsolved.org/">
+        <img class="card-thumb wide" src="web_thumbs/projectsolved_website.jpg" alt="Change Management Website" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-websites">Website</span>
+          <p class="card-title">Change Management Consulting Website</p>
+          <a class="card-link" href="https://www.projectsolved.org/" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Visit Site
+          </a>
+        </div>
+      </div>
+
+      <!-- ── NEWSLETTERS ── -->
+      <div class="card" data-cat="newsletters" data-img="web_thumbs/newsletter_dei.jpg" data-title="Maintaining Your DEI Commitment Amid Policy Shifts" data-url="https://wix.to/xSQoKZL">
+        <img class="card-thumb wide" src="web_thumbs/newsletter_dei.jpg" alt="DEI Newsletter" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-newsletters">Newsletter</span>
+          <p class="card-title">Maintaining Your DEI Commitment Amid Policy Shifts</p>
+          <a class="card-link" href="https://wix.to/xSQoKZL" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Newsletter
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="newsletters" data-img="web_thumbs/newsletter_partnerships.jpg" data-title="Redesigning Partnerships Around Shared Power" data-url="https://wix.to/IJo8qKR">
+        <img class="card-thumb wide" src="web_thumbs/newsletter_partnerships.jpg" alt="Partnerships Newsletter" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-newsletters">Newsletter</span>
+          <p class="card-title">Redesigning Partnerships Around Shared Power</p>
+          <a class="card-link" href="https://wix.to/IJo8qKR" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Newsletter
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="newsletters" data-img="web_thumbs/newsletter_pride.jpg" data-title="Celebrating Pride: Inclusive Practices for Nonprofits" data-url="https://wix.to/BefjnWQ">
+        <img class="card-thumb wide" src="web_thumbs/newsletter_pride.jpg" alt="Pride Newsletter" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-newsletters">Newsletter</span>
+          <p class="card-title">Celebrating Pride: Inclusive Practices for Nonprofits</p>
+          <a class="card-link" href="https://wix.to/BefjnWQ" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Newsletter
+          </a>
+        </div>
+      </div>
+
+      <!-- ── BLOGS & ARTICLES ── -->
+      <div class="card" data-cat="blogs" data-img="web_thumbs/article_yahoo_finance.jpg" data-title="E-Commerce Investment Group at MoneyShow — Yahoo Finance" data-url="https://finance.yahoo.com/news/peoples-equity-group-named-presenter-230000475.html">
+        <img class="card-thumb wide" src="web_thumbs/article_yahoo_finance.jpg" alt="Yahoo Finance Article" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-blogs">Article</span>
+          <p class="card-title">E-Commerce Investment Group at MoneyShow — Yahoo Finance</p>
+          <a class="card-link" href="https://finance.yahoo.com/news/peoples-equity-group-named-presenter-230000475.html" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Article
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="blogs" data-img="web_thumbs/article_disrupt.jpg" data-title="Disrupting E-Commerce Aggregation — Disrupt Magazine" data-url="https://disruptmagazine.com/peoples-equity-group-disrupts-ecommerce-aggregation/">
+        <img class="card-thumb wide" src="web_thumbs/article_disrupt.jpg" alt="Disrupt Magazine Article" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-blogs">Article</span>
+          <p class="card-title">Disrupting E-Commerce Aggregation — Disrupt Magazine</p>
+          <a class="card-link" href="https://disruptmagazine.com/peoples-equity-group-disrupts-ecommerce-aggregation/" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Article
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="blogs" data-img="web_thumbs/blog_giving_tuesday.jpg" data-title="Why Giving Tuesday Matters More Than Ever" data-url="https://www.erinhutt.com/post/why-giving-tuesday-matters-more-than-ever">
+        <img class="card-thumb" src="web_thumbs/blog_giving_tuesday.jpg" alt="Giving Tuesday Blog" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-blogs">Blog Post</span>
+          <p class="card-title">Why Giving Tuesday Matters More Than Ever</p>
+          <a class="card-link" href="https://www.erinhutt.com/post/why-giving-tuesday-matters-more-than-ever" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Post
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="blogs" data-img="web_thumbs/blog_community_events.jpg" data-title="Maximizing Community Engagement Through Impactful Events" data-url="https://www.erinhutt.com/post/maximizing-community-engagement-by-hosting-impactful-nonprofit-events">
+        <img class="card-thumb wide" src="web_thumbs/blog_community_events.jpg" alt="Community Engagement Blog" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-blogs">Blog Post</span>
+          <p class="card-title">Maximizing Community Engagement Through Impactful Events</p>
+          <a class="card-link" href="https://www.erinhutt.com/post/maximizing-community-engagement-by-hosting-impactful-nonprofit-events" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/></svg>
+            Read Post
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PRESENTATIONS ── -->
+      <div class="card" data-cat="presentations" data-img="pdf_thumbs/EARN_Presentation.png" data-title="Community Development Program Presentation">
+        <img class="card-thumb doc" src="pdf_thumbs/EARN_Presentation.png" alt="Presentation" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-presentations">Presentation</span>
+          <p class="card-title">Community Development Program Presentation</p>
+          <a class="card-link" href="EARN Presentation.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="presentations" data-img="pdf_thumbs/Presentation__ResidentRetention_FY25_Final.pptx.png" data-title="Resident Retention Strategy — FY25">
+        <img class="card-thumb doc" src="pdf_thumbs/Presentation__ResidentRetention_FY25_Final.pptx.png" alt="Resident Retention Presentation" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-presentations">Presentation</span>
+          <p class="card-title">Resident Retention Strategy — FY25</p>
+          <a class="card-link" href="Presentation_ ResidentRetention_FY25_Final.pptx.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- ── ONE PAGERS ── -->
+      <div class="card" data-cat="one-pagers" data-img="pdf_thumbs/One_Pager_Case_Study_Aligning_Departmental_Communications.png" data-title="Case Study — Aligning Departmental Communications">
+        <img class="card-thumb doc" src="pdf_thumbs/One_Pager_Case_Study_Aligning_Departmental_Communications.png" alt="One Pager" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-one-pagers">One Pager</span>
+          <p class="card-title">Case Study — Aligning Departmental Communications</p>
+          <a class="card-link" href="One Pager Case Study Aligning Departmental Communications.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="one-pagers" data-img="pdf_thumbs/EHC_Updated_Services_one_pagers.png" data-title="Consulting Services One Pager">
+        <img class="card-thumb doc" src="pdf_thumbs/EHC_Updated_Services_one_pagers.png" alt="Consulting Services One Pager" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-one-pagers">One Pager</span>
+          <p class="card-title">Consulting Services One Pager</p>
+          <a class="card-link" href="EHC Updated Services one pagers.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="one-pagers" data-img="Copy of Create branded one-pager.png" data-title="Branded One-Pager Design">
+        <img class="card-thumb doc" src="Copy of Create branded one-pager.png" alt="Branded One-Pager" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-one-pagers">One Pager</span>
+          <p class="card-title">Branded One-Pager Design</p>
+        </div>
+      </div>
+
+      <!-- ── BRANDED DOCUMENTS ── -->
+      <div class="card" data-cat="branded-docs" data-img="pdf_thumbs/EHC_Fundraising_Strategies_Support_Program_for_AVCPG_Grantees.png" data-title="Fundraising Strategies Support Program">
+        <img class="card-thumb doc" src="pdf_thumbs/EHC_Fundraising_Strategies_Support_Program_for_AVCPG_Grantees.png" alt="Fundraising Strategies" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-branded-docs">Branded Doc</span>
+          <p class="card-title">Fundraising Strategies Support Program</p>
+          <a class="card-link" href="EHC Fundraising Strategies Support Program for AVCPG Grantees.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="branded-docs" data-img="pdf_thumbs/NCST_2025_Annual_Report.png" data-title="Nonprofit Annual Report — 2025">
+        <img class="card-thumb doc" src="pdf_thumbs/NCST_2025_Annual_Report.png" alt="Annual Report 2025" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-branded-docs">Branded Doc</span>
+          <p class="card-title">Nonprofit Annual Report — 2025</p>
+          <a class="card-link" href="NCST_2025_Annual_Report.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="branded-docs" data-img="pdf_thumbs/Partnership_for_Better_Health_Strategic_Plan_(v3).png" data-title="Community Health Foundation — Strategic Plan">
+        <img class="card-thumb doc" src="pdf_thumbs/Partnership_for_Better_Health_Strategic_Plan_(v3).png" alt="Strategic Plan" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-branded-docs">Branded Doc</span>
+          <p class="card-title">Community Health Foundation — Strategic Plan</p>
+          <a class="card-link" href="Partnership for Better Health Strategic Plan (v3).pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- ── WORKBOOKS ── -->
+      <div class="card" data-cat="workbooks" data-img="pdf_thumbs/Nurturing_Peak_Performance.png" data-title="Nurturing Peak Performance">
+        <img class="card-thumb doc" src="pdf_thumbs/Nurturing_Peak_Performance.png" alt="Nurturing Peak Performance" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-workbooks">Workbook</span>
+          <p class="card-title">Nurturing Peak Performance</p>
+          <a class="card-link" href="Nurturing Peak Performance.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="workbooks" data-img="pdf_thumbs/Grassroots_Giving_Tuesday_Toolkit.png" data-title="Grassroots Giving Tuesday Toolkit">
+        <img class="card-thumb doc" src="pdf_thumbs/Grassroots_Giving_Tuesday_Toolkit.png" alt="Giving Tuesday Toolkit" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-workbooks">Workbook</span>
+          <p class="card-title">Grassroots Giving Tuesday Toolkit</p>
+          <a class="card-link" href="Grassroots Giving Tuesday Toolkit.pdf" target="_blank" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- ── FLYERS ── -->
+      <div class="card" data-cat="flyers" data-img="Retreat Flyer/1.jpg" data-title="Women's Leadership Retreat">
+        <img class="card-thumb portrait" src="Retreat Flyer/1.jpg" alt="Leadership Retreat Flyer" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-flyers">Flyer</span>
+          <p class="card-title">Women's Leadership Retreat</p>
+        </div>
+      </div>
+      <div class="card" data-cat="flyers" data-img="Retreat Flyer/2.jpg" data-title="Women's Leadership Retreat — Alt Design">
+        <img class="card-thumb portrait" src="Retreat Flyer/2.jpg" alt="Leadership Retreat Flyer Alt" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-flyers">Flyer</span>
+          <p class="card-title">Women's Leadership Retreat (Alt Design)</p>
+        </div>
+      </div>
+      <div class="card" data-cat="flyers" data-img="Retreat Flyer/3.jpg" data-title="Women's Leadership Retreat — Alt Design 2">
+        <img class="card-thumb portrait" src="Retreat Flyer/3.jpg" alt="Leadership Retreat Flyer Alt 2" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-flyers">Flyer</span>
+          <p class="card-title">Women's Leadership Retreat (Alt Design 2)</p>
+        </div>
+      </div>
+
+      <!-- ── INFOGRAPHICS ── -->
+      <div class="card" data-cat="infographics" data-img="WOMEN IN MILITARY MEDICINE.png" data-title="Community Conversation Event Graphic">
+        <img class="card-thumb" src="WOMEN IN MILITARY MEDICINE.png" alt="Community Conversation Graphic" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-infographics">Infographic</span>
+          <p class="card-title">Community Conversation Event Graphic</p>
+        </div>
+      </div>
+      <div class="card" data-cat="infographics" data-img="Your Team Meets Expectations - Project Solved.png" data-title="Team Performance Improvement Infographic">
+        <img class="card-thumb portrait" src="Your Team Meets Expectations - Project Solved.png" alt="Team Performance Infographic" loading="lazy"/>
+        <div class="card-body">
+          <span class="card-cat cat-infographics">Infographic</span>
+          <p class="card-title">Team Performance Improvement Infographic</p>
+        </div>
+      </div>
+
+      <!-- ── OTHER CANVA DESIGNS ── -->
+      <div class="card" data-cat="canva-designs" data-img="YouTube Thumbnail - R. Toles/1.png" data-title="YouTube Thumbnail — R. Toles">
+        <img class="card-thumb" src="YouTube Thumbnail - R. Toles/1.png" alt="YouTube Thumbnail R. Toles" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">YouTube Thumbnail — R. Toles</p></div>
+      </div>
+      <div class="card" data-cat="canva-designs" data-img="YouTube Thumbnail - R. Toles/Brittany Powell.png" data-title="YouTube Thumbnail — Brittany Powell">
+        <img class="card-thumb" src="YouTube Thumbnail - R. Toles/Brittany Powell.png" alt="YouTube Thumbnail Brittany Powell" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">YouTube Thumbnail — Brittany Powell</p></div>
+      </div>
+      <div class="card" data-cat="canva-designs" data-img="YouTube Thumbnail - R. Toles/Michelle Kerr-Spry.png" data-title="YouTube Thumbnail — Michelle Kerr-Spry">
+        <img class="card-thumb" src="YouTube Thumbnail - R. Toles/Michelle Kerr-Spry.png" alt="YouTube Thumbnail Michelle Kerr-Spry" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">YouTube Thumbnail — Michelle Kerr-Spry</p></div>
+      </div>
+
+      <div class="card" data-cat="canva-designs" data-img="Podcast Cover/1.png" data-title="Podcast Episode Cover — Ep. 01">
+        <img class="card-thumb" src="Podcast Cover/1.png" alt="Podcast Cover Ep 01" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">Podcast Episode Cover — Ep. 01</p></div>
+      </div>
+      <div class="card" data-cat="canva-designs" data-img="Podcast Cover/2.png" data-title="Podcast Episode Cover — Ep. 02">
+        <img class="card-thumb" src="Podcast Cover/2.png" alt="Podcast Cover Ep 02" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">Podcast Episode Cover — Ep. 02</p></div>
+      </div>
+      <div class="card" data-cat="canva-designs" data-img="Podcast Cover/3.png" data-title="Podcast Episode Cover — Ep. 03">
+        <img class="card-thumb" src="Podcast Cover/3.png" alt="Podcast Cover Ep 03" loading="lazy"/>
+        <div class="card-body"><span class="card-cat cat-canva-designs">Other Canva Design</span><p class="card-title">Podcast Episode Cover — Ep. 03</p></div>
+      </div>
+
+      <!-- ── SOCIAL MEDIA ── -->
+      <div class="card" data-cat="social-media" data-img="SocMed Post/1.png" data-title="Why Change Fails"><img class="card-thumb" src="SocMed Post/1.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Why Change Fails</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/2.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/2.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/3.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/4.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/5.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/5.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/6.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/6.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/7.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/7.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/SEP 26.png" data-title="Social Post — Sep 26"><img class="card-thumb" src="SocMed Post/SEP 26.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Post — Sep 26</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/What Broken Systems Teach Us.png" data-title="What Broken Systems Teach Us"><img class="card-thumb" src="SocMed Post/What Broken Systems Teach Us.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">What Broken Systems Teach Us</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/10.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/10.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/11.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/11.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/12.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/12.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post/13.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Post/13.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 1.1.png" data-title="Social Series — Post 1.1"><img class="card-thumb" src="SocMed Posts/Post 1.1.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 1.1</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 1.2.png" data-title="Social Series — Post 1.2"><img class="card-thumb" src="SocMed Posts/Post 1.2.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 1.2</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 1.3.png" data-title="Social Series — Post 1.3"><img class="card-thumb" src="SocMed Posts/Post 1.3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 1.3</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 1.4.png" data-title="Social Series — Post 1.4"><img class="card-thumb" src="SocMed Posts/Post 1.4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 1.4</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 1.5.png" data-title="Social Series — Post 1.5"><img class="card-thumb" src="SocMed Posts/Post 1.5.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 1.5</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.1.png" data-title="Social Series — Post 2.1"><img class="card-thumb" src="SocMed Posts/Post 2.1.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.1</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.2.png" data-title="Social Series — Post 2.2"><img class="card-thumb" src="SocMed Posts/Post 2.2.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.2</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.3.png" data-title="Social Series — Post 2.3"><img class="card-thumb" src="SocMed Posts/Post 2.3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.3</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.4.png" data-title="Social Series — Post 2.4"><img class="card-thumb" src="SocMed Posts/Post 2.4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.4</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.5.png" data-title="Social Series — Post 2.5"><img class="card-thumb" src="SocMed Posts/Post 2.5.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.5</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 2.6.png" data-title="Social Series — Post 2.6"><img class="card-thumb" src="SocMed Posts/Post 2.6.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 2.6</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 3.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 4.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 5.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 5.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 6.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 6.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 7.1.png" data-title="Social Series — Post 7.1"><img class="card-thumb" src="SocMed Posts/Post 7.1.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 7.1</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 7.2.png" data-title="Social Series — Post 7.2"><img class="card-thumb" src="SocMed Posts/Post 7.2.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 7.2</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 7.3.png" data-title="Social Series — Post 7.3"><img class="card-thumb" src="SocMed Posts/Post 7.3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 7.3</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 7.4.png" data-title="Social Series — Post 7.4"><img class="card-thumb" src="SocMed Posts/Post 7.4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Series — Post 7.4</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 8.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 8.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 9.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 9.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 10.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 10.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 11.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 11.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 12.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 12.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Post 14.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Post 14.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/Page 13.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/Page 13.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/27.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/27.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/28.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/28.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/29.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/29.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Posts/30.png" data-title="Social Media Graphic"><img class="card-thumb" src="SocMed Posts/30.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Social Media Graphic</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/1.png" data-title="Monthly Stats Campaign — Slide 1"><img class="card-thumb" src="SocMed Post NCST Feb Stats/1.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 1</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/2.png" data-title="Monthly Stats Campaign — Slide 2"><img class="card-thumb" src="SocMed Post NCST Feb Stats/2.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 2</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/3.png" data-title="Monthly Stats Campaign — Slide 3"><img class="card-thumb" src="SocMed Post NCST Feb Stats/3.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 3</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/4.png" data-title="Monthly Stats Campaign — Slide 4"><img class="card-thumb" src="SocMed Post NCST Feb Stats/4.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 4</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/5.png" data-title="Monthly Stats Campaign — Slide 5"><img class="card-thumb" src="SocMed Post NCST Feb Stats/5.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 5</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/6.png" data-title="Monthly Stats Campaign — Slide 6"><img class="card-thumb" src="SocMed Post NCST Feb Stats/6.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 6</p></div></div>
+      <div class="card" data-cat="social-media" data-img="SocMed Post NCST Feb Stats/7.png" data-title="Monthly Stats Campaign — Slide 7"><img class="card-thumb" src="SocMed Post NCST Feb Stats/7.png" loading="lazy"/><div class="card-body"><span class="card-cat cat-social-media">Social Media</span><p class="card-title">Monthly Stats Campaign — Slide 7</p></div></div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+<!-- ── PRICING ───────────────────────────── -->
+<section class="pricing-wrap" id="pricing">
+  <div class="pricing-inner">
+    <p class="pricing-eyebrow">Monthly Retainer Packages</p>
+    <h2 class="pricing-heading">Let's Work <span>Together</span></h2>
+    <p class="pricing-subhead">Professional brand content and design delivered on your timeline. All packages include strategy, design, writing, and revisions.</p>
+
+    <div class="pricing-cards">
+
+      <!-- PACKAGE 1 — Express -->
+      <div class="pricing-card">
+        <span class="plan-badge badge-1">Express</span>
+        <h3 class="plan-name">The Starter</h3>
+        <p class="plan-tagline">Fast, focused content for brands that need quality work delivered quickly.</p>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount">1,500</span>
+          <span class="period">&nbsp;/ month</span>
+        </div>
+        <div class="plan-turnaround">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          1–2 Business Day Turnaround
+        </div>
+        <hr class="plan-divider"/>
+        <ul class="plan-features">
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>6 deliverables per month</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Social media graphics, one-pagers, flyers, newsletters, blog posts</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>2 rounds of revisions per piece</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Monthly planning call (30 min)</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Files delivered in all needed formats</li>
+        </ul>
+      </div>
+
+      <!-- PACKAGE 2 — Standard (Featured) -->
+      <div class="pricing-card featured">
+        <span class="plan-badge badge-2">Most Popular</span>
+        <h3 class="plan-name">The Growth Plan</h3>
+        <p class="plan-tagline">Consistent, high-volume content for brands ready to show up powerfully every month.</p>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount">1,800</span>
+          <span class="period">&nbsp;/ month</span>
+        </div>
+        <div class="plan-turnaround">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          3 Business Day Turnaround
+        </div>
+        <hr class="plan-divider"/>
+        <ul class="plan-features">
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>12 deliverables per month</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>All deliverable types — graphics, docs, presentations, workbooks</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>2 rounds of revisions per piece</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Monthly strategy call (45 min)</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Brand alignment across all pieces</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Files delivered in all needed formats</li>
+        </ul>
+      </div>
+
+      <!-- PACKAGE 3 — Scale -->
+      <div class="pricing-card">
+        <span class="plan-badge badge-3">Scale</span>
+        <h3 class="plan-name">The Full Suite</h3>
+        <p class="plan-tagline">Maximum output for organizations with ongoing, high-demand content needs across multiple channels.</p>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount">2,250</span>
+          <span class="period">&nbsp;/ month</span>
+        </div>
+        <div class="plan-turnaround">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          5 Business Day Turnaround
+        </div>
+        <hr class="plan-divider"/>
+        <ul class="plan-features">
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>20 deliverables per month</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>All deliverable types — full content suite coverage</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>2 rounds of revisions per piece</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Bi-weekly strategy calls (30 min each)</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Brand alignment across all pieces</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Files delivered in all needed formats</li>
+          <li><span class="check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support &amp; faster response time</li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="pricing-note">All packages are month-to-month · No long-term contracts · Custom project pricing also available<br>Website design &amp; development is priced separately — <a href="mailto:donettenapone98@gmail.com">reach out for a custom quote</a><br><a href="mailto:donettenapone98@gmail.com">donettenapone98@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- ── LIGHTBOX ───────────────────────────── -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">&#x2715;</button>
+  <div class="lightbox-inner">
+    <img id="lb-img" src="" alt=""/>
+    <p class="lightbox-title" id="lb-title"></p>
+    <div class="lightbox-nav">
+      <button id="lb-prev">&#8592;</button>
+      <button id="lb-next">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer>
+  &copy; 2026 <span>Donette Napone</span> &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp;
+  <a href="mailto:donettenapone98@gmail.com">donettenapone98@gmail.com</a>
+</footer>
+
+<script>
+  const homeView    = document.getElementById('home-view');
+  const galleryView = document.getElementById('gallery-view');
+  const heading     = document.getElementById('gallery-heading');
+  const backBtn     = document.getElementById('back-btn');
+  const allCards    = document.querySelectorAll('.card');
+
+  const catNames = {
+    'landing-pages': 'Landing Pages',
+    'websites':      'Websites',
+    'social-media':  'Social Media',
+    'newsletters':   'Newsletters',
+    'blogs':         'Blogs &amp; Articles',
+    'presentations': 'Presentations',
+    'one-pagers':    'One Pagers',
+    'branded-docs':  'Branded Documents',
+    'workbooks':     'Workbooks',
+    'flyers':        'Flyers',
+    'infographics':  'Infographics',
+    'canva-designs': 'Other Canva Designs',
+  };
+
+  // Show a category
+  document.querySelectorAll('.cat-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const cat = tile.dataset.cat;
+      // Show/hide cards
+      allCards.forEach(card => {
+        card.style.display = card.dataset.cat === cat ? '' : 'none';
+      });
+      heading.innerHTML = catNames[cat] || cat;
+      homeView.style.display    = 'none';
+      galleryView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Back to home
+  backBtn.addEventListener('click', () => {
+    galleryView.style.display = 'none';
+    homeView.style.display    = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── LIGHTBOX ────────────────────────────
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lb-img');
+  const lbTitle  = document.getElementById('lb-title');
+  const lbClose  = document.getElementById('lb-close');
+  const lbPrev   = document.getElementById('lb-prev');
+  const lbNext   = document.getElementById('lb-next');
+  let visCards = [], curIdx = 0;
+
+  function visibleImageCards() {
+    return [...allCards].filter(c => c.style.display !== 'none' && !c.dataset.url);
+  }
+  function openLB(idx) {
+    visCards = visibleImageCards();
+    curIdx   = idx;
+    lbImg.src = visCards[curIdx].dataset.img || '';
+    lbTitle.textContent = visCards[curIdx].dataset.title || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  allCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.dataset.url) { window.open(card.dataset.url, '_blank'); return; }
+      const imgs = visibleImageCards();
+      const idx  = imgs.indexOf(card);
+      if (idx > -1) openLB(idx);
+    });
+  });
+  lbClose.addEventListener('click', closeLB);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+  lbPrev.addEventListener('click', () => {
+    visCards = visibleImageCards();
+    curIdx = (curIdx - 1 + visCards.length) % visCards.length;
+    lbImg.src = visCards[curIdx].dataset.img || '';
+    lbTitle.textContent = visCards[curIdx].dataset.title || '';
+  });
+  lbNext.addEventListener('click', () => {
+    visCards = visibleImageCards();
+    curIdx = (curIdx + 1) % visCards.length;
+    lbImg.src = visCards[curIdx].dataset.img || '';
+    lbTitle.textContent = visCards[curIdx].dataset.title || '';
+  });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLB();
+    if (e.key === 'ArrowLeft')  lbPrev.click();
+    if (e.key === 'ArrowRight') lbNext.click();
+  });
+</script>
+</body>
+</html>
