@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donette Napone — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green:       #74a12e;
+      --green-light: #b9dca9;
+      --pink:        #fc9fb1;
+      --pink-light:  #fcbacb;
+      --white:       #ffffff;
+      --dark:        #1c2117;
+      --text:        #2d3a22;
+      --muted:       #7a8c6a;
+      --gray:        #f5f7f3;
+      --border:      #e0e8d8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, var(--dark) 0%, #2a4a1a 100%);
+      color: var(--white);
+      padding: 44px 56px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(185,220,169,0.15) 0%, transparent 70%);
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 30%;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(252,159,177,0.1) 0%, transparent 70%);
+    }
+    .header-inner { position: relative; z-index: 1; }
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--green-light);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .contact-row a { color: var(--pink-light); text-decoration: none; }
+    .contact-item { display: flex; align-items: center; gap: 6px; }
+
+    /* ── BODY ── */
+    .body { padding: 0 56px 56px; }
+
+    /* ── SECTION ── */
+    .section { margin-top: 36px; }
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      border-bottom: 2px solid var(--green-light);
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #3a4a2e;
+      max-width: 760px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      background: var(--gray);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .skill-tag.highlight {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--dark);
+    }
+
+    /* ── EXPERIENCE ── */
+    .job { margin-bottom: 28px; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .job-title-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .job-company {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--dark);
+    }
+    .job-role {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .job-date {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--green);
+      white-space: nowrap;
+      background: var(--gray);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 10px;
+    }
+    .job ul {
+      margin-top: 8px;
+      padding-left: 16px;
+    }
+    .job ul li {
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: #3a4a2e;
+      margin-bottom: 4px;
+    }
+    .job ul li::marker { color: var(--green); }
+
+    /* ── EDUCATION ── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .edu-school { font-weight: 700; font-size: 0.95rem; }
+    .edu-degree { font-size: 0.84rem; color: var(--muted); margin-top: 2px; }
+    .edu-cert {
+      display: inline-block;
+      margin-top: 6px;
+      background: var(--pink-light);
+      border-radius: 12px;
+      padding: 2px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* ── ACCENT BAR ── */
+    .accent-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 50%, var(--pink) 100%);
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { font-size: 12px; }
+      .header { padding: 32px 44px 28px; }
+      .body { padding: 0 44px 44px; }
+      .name { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="accent-bar"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <h1 class="name">Donette Napone</h1>
+    <p class="title">Marketing Assistant &nbsp;·&nbsp; Content Creator &nbsp;·&nbsp; Canva Designer</p>
+    <div class="contact-row">
+      <span class="contact-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Philippines, Remote
+      </span>
+      <span class="contact-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +63 977 152 9289
+      </span>
+      <span class="contact-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:donettenapone98@gmail.com">donettenapone98@gmail.com</a>
+      </span>
+      <span class="contact-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12a15.3 15.3 0 0 1 4-10z"/></svg>
+        <a href="https://donettenapone98.github.io/portfolio/" target="_blank">Portfolio</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <p class="section-title">Professional Summary</p>
+    <p class="summary">
+      Detail-oriented Marketing Assistant with hands-on experience in content creation, social media management, and branded design across multiple clients and industries. Proficient in Canva with a strong eye for brand consistency. Experienced in building full monthly content calendars, producing social media graphics, newsletters, flyers, infographics, one-pagers, and digital products. Highly organized, self-directed, and comfortable managing multiple deliverables in a remote environment.
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <p class="section-title">Skills &amp; Tools</p>
+    <div class="skills-grid">
+      <span class="skill-tag highlight">Canva Design</span>
+      <span class="skill-tag highlight">Content Calendar Planning</span>
+      <span class="skill-tag highlight">Social Media Graphics</span>
+      <span class="skill-tag highlight">Newsletter Production</span>
+      <span class="skill-tag highlight">Brand Identity</span>
+      <span class="skill-tag">Flyers &amp; Infographics</span>
+      <span class="skill-tag">One-Pagers &amp; Workbooks</span>
+      <span class="skill-tag">Pitch Deck Design</span>
+      <span class="skill-tag">eBook Design</span>
+      <span class="skill-tag">Landing Page Copy</span>
+      <span class="skill-tag">Blog Writing &amp; Editing</span>
+      <span class="skill-tag">Google Workspace</span>
+      <span class="skill-tag">Asana</span>
+      <span class="skill-tag">HubSpot</span>
+      <span class="skill-tag">Monday.com</span>
+      <span class="skill-tag">Project Coordination</span>
+      <span class="skill-tag">Client Communication</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <p class="section-title">Experience</p>
+
+    <!-- Freelance -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-row">
+          <span class="job-company">Freelance Multi-Client Support, Remote</span>
+          <span class="job-role">— Marketing &amp; Content Assistant</span>
+        </div>
+        <span class="job-date">May 2024 – Present</span>
+      </div>
+      <ul>
+        <li>Designs and edits all client content in Canva — including social media graphics, flyers, infographics, newsletters, branded one-pagers, workbooks, and digital products.</li>
+        <li>Builds and manages full monthly content calendars for multiple clients across different industries, ensuring consistent posting schedules and on-brand messaging.</li>
+        <li>Produces social media post suites (carousel graphics, caption copy, story templates) across multiple campaigns and client brands simultaneously.</li>
+        <li>Creates client-facing newsletters from layout to copy — structuring content, applying brand guidelines, and preparing for distribution.</li>
+        <li>Designs landing page graphics, YouTube thumbnails, and campaign visuals to support client marketing initiatives.</li>
+        <li>Supports event promotion, webinar materials, and stakeholder communication assets.</li>
+        <li>Manages multiple deliverables across clients using Asana and project boards, maintaining timelines and revision rounds.</li>
+      </ul>
+    </div>
+
+    <!-- Peoples Equity Group -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-row">
+          <span class="job-company">Peoples Equity Group, Remote</span>
+          <span class="job-role">— Executive Coordinator &amp; Content Support</span>
+        </div>
+        <span class="job-date">Dec 2020 – May 2024</span>
+      </div>
+      <ul>
+        <li>Designed and formatted professional pitch decks used for investor presentations and business development outreach.</li>
+        <li>Produced branded eBooks and digital guides — handling layout, formatting, visual design, and final export for distribution.</li>
+        <li>Created workbooks and training materials, applying consistent brand identity across all deliverables.</li>
+        <li>Managed executive communications, document preparation, and coordination between remote teams.</li>
+        <li>Supported confidential business operations and maintained organized digital asset libraries.</li>
+      </ul>
+    </div>
+
+    <!-- Loud Rumor -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-row">
+          <span class="job-company">Loud Rumor, Remote</span>
+          <span class="job-role">— Operations and Billing Associate</span>
+        </div>
+        <span class="job-date">May 2021 – Feb 2023</span>
+      </div>
+      <ul>
+        <li>Managed billing processes, subscription updates, and account administration for a U.S.-based marketing agency.</li>
+        <li>Collaborated with U.S.-based teams to streamline operations and improve workflow efficiency.</li>
+      </ul>
+    </div>
+
+    <!-- EY -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-row">
+          <span class="job-company">Sycip Gorres Velayo &amp; Co. (EY), Philippines</span>
+          <span class="job-role">— Audit Associate</span>
+        </div>
+        <span class="job-date">Dec 2019 – Dec 2020</span>
+      </div>
+      <ul>
+        <li>Prepared working papers, analyzed financial statements, and supported audit procedures across multiple industries.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <p class="section-title">Education</p>
+    <div class="edu-row">
+      <div>
+        <p class="edu-school">Xavier University, Philippines</p>
+        <p class="edu-degree">Bachelor of Science in Accountancy &nbsp;·&nbsp; Jun 2015 – Mar 2019</p>
+        <span class="edu-cert">Licensed Certified Public Accountant (CPA)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="accent-bar"></div>
+
+</body>
+</html>
